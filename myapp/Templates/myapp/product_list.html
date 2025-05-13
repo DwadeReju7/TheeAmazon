@@ -1,0 +1,20 @@
+{% extends 'myapp/base_commerce.html' %}
+
+{% block title %}Product List{% endblock title %}
+
+{% block content %}
+    <h2>All Products</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{% url 'myapp:product_detail' product.pk %}">
+                    {{product.name}}
+                    
+                </a> - {{product.price}} - {{product.category}}   
+            </li>
+        {%empty%}
+           
+        {%endfor%}
+    </ul>
+
+{% endblock content %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Product - {{object.product_name}}</title>
+</head>
+<body>
+    <h1>Confirm Deletion</h1>
+
+    <p>Are you sure you want to delete the following product?</p>
+
+    <ul>
+        <li><strong>Product Name:</strong>{{object.product.name}}</li>
+        <li><strong>Price:</strong>{{object.Price}}</li>
+        <li><strong>Category:</strong>{{object.Category}}</li>
+    </ul>
+
+    <form method ="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete it</button>
+        <a href="{% url 'myapp:product_detail' object.pk %}">Cancel</a>
+    </form>
+</body>
+</html>
