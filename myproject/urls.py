@@ -20,6 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
          path('admin/', admin.site.urls),
+         path('accounts/', include('allauth.urls')),
          path('myapp/', include('myapp.urls')), # Include your app's URLs
          # Add other project-wide URLs here if needed
      ]

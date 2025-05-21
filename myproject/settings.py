@@ -17,6 +17,7 @@ from pathlib import Path
 import environ
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env( DEBUG=(bool, False))
@@ -44,8 +45,33 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'myapp',
+
+    #Allauth apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    #... add providers below, e.g.:
+    'allauth.socialaccount.providers.google',
 ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ # Allauth settings
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False # Or True, depending on your model needs
+ACCOUNT_AUTHENTICATION_METHOD = 'email' # Or 'username' or 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'optional' # Or 'mandatory' or 'none'
+LOGIN_REDIRECT_URL = '/' # URL to redirect to after login (e.g., home page)
+ACCOUNT_LOGOUT_REDIRECT_URL = '/' # URL to redirect to after logout
+        # ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True # Optional
+        # ACCOUNT_SESSION_REMEMBER = True # Optional
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -89,6 +116,27 @@ DATABASES = {
      'PASSWORD': 'password',
      'HOST': '127.0.0.1',
      'PORT': '5432',
+    }
+}
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+                # For each OAuth based provider, either add a ``SocialApp``
+                # (``socialaccount`` app) containing the required client
+                # credentials, or list them here:
+    'APP': {
+        'client_id': env('GOOGLE_CLIENT_ID'),
+        'secret': env('GOOGLE_CLIENT_SECRET'),
+        'key': '' # Keep empty
+    },
+    'SCOPE': [
+        'profile',
+        'email',
+    ],
+    'AUTH_PARAMS': {
+        'access_type': 'online',
+    }
     }
 }
 

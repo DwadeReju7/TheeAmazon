@@ -13,6 +13,9 @@
         <li><strong>Category:</strong> {{object.product_category}}</li>
     </ul>
 
+    {% if user.is_authenticated %}
+    <a href="{% url 'myapp:product_create' %}">Create New</a>
+  {% endif %}
     <p>
         <a href="{% url 'myapp:product_update' object.pk %}">Update</a>
         <a href="{% url 'myapp:product_delete' object.pk %}">Delete</a>
