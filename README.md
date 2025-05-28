@@ -20,3 +20,12 @@ With adding Google Authentication to the project. The firsts step was to go to t
 In order to test login we ran our command "python3 manage.py runserver" upon getting our http link the first thing we did was add '/accounts/' to the link which took us to the sign in page. The immediate difference I noticed was the additional "Or use a third party" option that appeared with Google hyperlinked. I first focused on logging in locally to ensure I had the proper credentials. Funny enough I forgot my password but was able to login to my admin account and change my password directly there. I used the link for the Google Auth and was amazed how this looked the exact same as the process with well established sites. 
 
 Permission restrictions on update/delete views were completed by adding UserPassesTextMixin so while I am logged in, every product I view in my inventory has update and delete options. 
+
+(DRF Assignment 01)
+The Django RestFramework was added to my settings.py under installed apps then it was given its own section as a dictionary within the document. 
+
+The base URL for /api/ is added to our HTTP info thats loaded once we begin running the server. After putting the base url of api we can add the model and ID number that leads us to direct inputs. 
+
+The models that are exposed in the API are CRUD (create, read, update & delete)
+
+To test your API using a browsable API the first thing you'll have to do is run "python3 manage.py runserver". Once it gives up the HTTP response to put in the browser you'll need to ensure you are logged in so you have the proper authentication. '/api/' to the end of the browser address. 
