@@ -5,6 +5,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Products # Import your specific model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
+from rest_framework import viewsets, permissions
+from .models import Products # Import your model(s)
+from .serializers import ProductsSerializer # Import your serializer(s)
 
 
 class ProductListView(LoginRequiredMixin, ListView):
@@ -46,3 +49,11 @@ class ProductDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
 
          def test_func(self):
                 return self.request.user.is_staff
+         
+class ProductsViewSet(viewsets.ModelViewSet):
+         """
+         API endpoint that allows YourModel objects to be viewed or edited.
+         Provides list, create, retrieve, update, partial_update, destroy actions.
+         """
+         queryset = Products.objects.all().order_by('-id') # Or appropriate ordering
+         serializer_class = ProductsSerializer

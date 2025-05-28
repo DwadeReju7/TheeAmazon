@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from myapp import views 
 
+router = DefaultRouter()
+router.register(r'Products', views.ProductsViewSet, basename='Products')
 
 urlpatterns = [
          path('admin/', admin.site.urls),
          path('accounts/', include('allauth.urls')),
          path('myapp/', include('myapp.urls')), # Include your app's URLs
          # Add other project-wide URLs here if needed
+         path('api/', include(router.urls)),
      ]
