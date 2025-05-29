@@ -20,3 +20,21 @@ With adding Google Authentication to the project. The firsts step was to go to t
 In order to test login we ran our command "python3 manage.py runserver" upon getting our http link the first thing we did was add '/accounts/' to the link which took us to the sign in page. The immediate difference I noticed was the additional "Or use a third party" option that appeared with Google hyperlinked. I first focused on logging in locally to ensure I had the proper credentials. Funny enough I forgot my password but was able to login to my admin account and change my password directly there. I used the link for the Google Auth and was amazed how this looked the exact same as the process with well established sites. 
 
 Permission restrictions on update/delete views were completed by adding UserPassesTextMixin so while I am logged in, every product I view in my inventory has update and delete options. 
+
+(DRF Assignment 01)
+The Django RestFramework was added to my settings.py under installed apps then it was given its own section as a dictionary within the document. 
+
+The base URL for /api/ is added to our HTTP info thats loaded once we begin running the server. After putting the base url of api we can add the model and ID number that leads us to direct inputs. 
+
+The models that are exposed in the API are CRUD (create, read, update & delete)
+
+To test your API using a browsable API the first thing you'll have to do is run "python3 manage.py runserver". Once it gives up the HTTP response to put in the browser you'll need to ensure you are logged in so you have the proper authentication. '/api/' to the end of the browser address. 
+
+(DRF Assignment 02)
+Using the query parameters includes adding the following examples to the end of my http link in my web browser (`?field=value`, `?search=term`, `?ordering=-field`) these paramters were added to my views.py and values for the first parameter include putting in either the category or product name, the second includes adding the product name and the third is ordering only by price as set in my views document.
+
+Pagination we set in my settings.py document with the number set to 10. By setting this each page size stops at 10 products before going to the next. With '?page=' I can select which page I want to go directly to. 
+
+Customer permission logic is tied to each individual owner within this database. For the purpose of this project I created 2 owners, while they could view each others submissions they could not edit or delete as that was reserved for their own work. 
+
+When testing new features a large part of this is knowing what account you want to be logged into or if you want to be logged in at all. I say this because you want to ensure your filtering, updating and deleting is all functioning. However to ensure you have a secure database you want to logout and see what permissions are available without an account (This is crucial to ensuring you have a secure database). 
