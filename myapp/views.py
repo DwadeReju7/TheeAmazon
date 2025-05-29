@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from rest_framework import viewsets, permissions
 from .models import Products # Import your model(s)
 from .serializers import ProductsSerializer # Import your serializer(s)
+from .permissions import IsOwnerOrReadOnly
 
 
 class ProductListView(LoginRequiredMixin, ListView):
@@ -57,3 +58,10 @@ class ProductsViewSet(viewsets.ModelViewSet):
          """
          queryset = Products.objects.all().order_by('-id') # Or appropriate ordering
          serializer_class = ProductsSerializer
+         filterset_fields = ['category', 'product_name']
+         search_fields = ['product_name']
+         ordering_fields = ['price']
+         permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
+         def perform_create(self, serializer):
+                 serializer.save(owner=self.request.user)

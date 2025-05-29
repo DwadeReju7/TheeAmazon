@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Customer(models.Model):
     name = models.CharField(max_length=100)
@@ -19,6 +20,7 @@ class Products(models.Model):
     product_name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='items', on_delete=models.CASCADE, null=True, )
             # ... other fields
 
     def __str__(self):

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'myapp',
+    'django_filters',
 
     #Allauth apps
     'allauth',
@@ -91,10 +92,19 @@ REST_FRAMEWORK = {
              # 'rest_framework.permissions.IsAuthenticatedOrReadOnly' # Allows anonymous GET requests
              # 'rest_framework.permissions.AllowAny' # No restrictions (use carefully!)
          ],
+         'DEFAULT_FILTER_BACKENDS': [
+                    'django_filters.rest_framework.DjangoFilterBackend',
+                    'rest_framework.filters.SearchFilter',
+                    'rest_framework.filters.OrderingFilter',
+         ],
+         'DEFAULT_PAGINATION_CLASS': 
+            'rest_framework.pagination.PageNumberPagination',
+            'PAGE_SIZE': 10, # Set default number of items per page
+         
          # Optional: Default pagination settings
          # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
          # 'PAGE_SIZE': 10
-     }
+    }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
