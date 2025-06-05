@@ -38,3 +38,10 @@ Pagination we set in my settings.py document with the number set to 10. By setti
 Customer permission logic is tied to each individual owner within this database. For the purpose of this project I created 2 owners, while they could view each others submissions they could not edit or delete as that was reserved for their own work. 
 
 When testing new features a large part of this is knowing what account you want to be logged into or if you want to be logged in at all. I say this because you want to ensure your filtering, updating and deleting is all functioning. However to ensure you have a secure database you want to logout and see what permissions are available without an account (This is crucial to ensuring you have a secure database). 
+
+(CONTAINERIZATION ASSIGNMENT 01)
+You have to install docker in your terminal and then create docker files including, Dockerfile, .dockerignore and docker-compose.yml. You also want to make sure docker is on your local device so you can log in to your dashboard. When you submit docker compose up you start running the containers and view logs in real time as well as access your application via the exposed ports. 
+
+.env.example is a sample .env file that you leave saved within your folder for any additional developers who may need guidance on how to recreate what you've built. You fill it up with dummy text.
+
+
