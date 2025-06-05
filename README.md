@@ -42,6 +42,18 @@ When testing new features a large part of this is knowing what account you want 
 (CONTAINERIZATION ASSIGNMENT 01)
 You have to install docker in your terminal and then create docker files including, Dockerfile, .dockerignore and docker-compose.yml. You also want to make sure docker is on your local device so you can log in to your dashboard. When you submit docker compose up you start running the containers and view logs in real time as well as access your application via the exposed ports. 
 
-.env.example is a sample .env file that you leave saved within your folder for any additional developers who may need guidance on how to recreate what you've built. You fill it up with dummy text.
+.env.example is a sample .env file that you leave saved within your folder for any additional developers who may need guidance on how to recreate what you've built. You fill it up with dummy text. Example below:
+SECRET_KEY=your-super-secret-django-key-here!@#$%^&*(-+=)
+DEBUG=FALSE
+DATABASE_URL=postgres://postgres:yourpassword@localhost:input/yourmodel
+POSTGRES_DB=yourdatabase
+POSTGRES_USER=yourusernamme
+POSTGRES_PASSWORD=samplepassword
+GOOGLE_CLIENT_ID=19232038-examplepulledfromgoogleclient
+GOOGLE_CLIENT_SECRET=G283084-examplepulledfromgoogleclient
+
+Running the database migrations took the longest amount of time because it was brought to my attention the variety of issues that I ran into. The first step was to do the docker compose build to build out the containers, from there you start the containers with docker compose up -d. The following steps include docker compose ps (to check status), docker compose logs -f web(to access logs). From there you will add docker compose exec and this is when I got different issues. I  was running into multiple issues connecting my docker to my Django database. I  needed to import pip install python-decouple dj-database-url. django_web kept exited with code 1 so I  must have been running into an issue for it to keep crashing. I  had to download wait-for-it.sh to ensure that my app waited for my database before starting. Luckily this worked and I was able to successfully migrate.
+
+In order to access the running application and API I did not have to go in my venv and hit the 'runserver' command. Instead I was able to grab the link directly from my terminal and type it into my browser. In order to access my api I just needed to add '/api/' to my url. 
 
 
