@@ -16,6 +16,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import environ
 import os
+import dj_database_url
+from decouple import config
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,7 +36,7 @@ SECRET_KEY = env ('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env ('DEBUG')
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -142,13 +145,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-
-     'ENGINE': 'django.db.backends.postgresql',
-     'NAME':'ecommerce_db',
-     'USER':'postgres',
-     'PASSWORD':'password',
-     'HOST': 'localhost',
-     'PORT': '5432'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecommerce_db',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
