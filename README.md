@@ -56,4 +56,19 @@ Running the database migrations took the longest amount of time because it was b
 
 In order to access the running application and API I did not have to go in my venv and hit the 'runserver' command. Instead I was able to grab the link directly from my terminal and type it into my browser. In order to access my api I just needed to add '/api/' to my url. 
 
+(DEPLOYMENT ASSIGNMENT 01)
+My AWS Deployment process was very detailed yet straight forward. I first had to make sure my account was active in my AWS Management Console. From there I had to configure both an ECR and an EC2 instance. From there the next step was to push the django application to the ECR instance. This included creating the repository and taking that information to input into my local system.
+
+ECR stands for Elastic Container Registry. This is meant to capture the images within my database and maintain a copy. Outside of ECR is my EC2 which keeps log of all my instances as well as the applicable data and information that comes with it. This will be essential when launching the browser. 
+
+When pushing an image to your ECR the first thing you have to do is authenticate your Docker to ECR locally. This will be done using a command that includes both Docker and AWS controls. Upon authentication, you'll use docker compose to to "build" and essentially name the image. After that you'll use the ECR reposiroty URI to add to your terminal and tag that image in preparation for it to be pushed. The final step is to push the image to the ECR. 
+
+Setting up the EC2 instance and getting it to run properly took me the longest out of each of these tasks. The first thing you'll have to do is login to AWS and launch your instance and give it a name. From there you'll establish your network settings, security groups and storage configurations. Once that is completed you can launch your instance. Upon launching the instance you'll then install docker and connect to your EC2. You'll then SSH into your EC2 instance directly on the terminal (this was cool because a little bird popped up every time it was successful). We used 'nano' to modify both .env as well as docker-compose.yml in the EC2 instance. To transfer files there were a series of docker commands starting with docker compose. 
+
+It was important to make certain changes to our docker-compose.yml document as well as our .env for our EC2. Being as though a lot of the settings were configured locally we needed to ensure that they would transfer over to our EC2 instance as well. You want to be sure to modify the docker-compose.yml so you are able to input the image from the ECR into the document. With this step it is important to remove volume mount as well, because the only code should be coming from ECR image. The next step was to modify the command so migrations will run automatically. For .env you would use DEBUG=False in order to address security, this is important. Once you go into ALLOWED_HOST you would input the EC2 Public IP. CSRF_TRUSTED_ORIGINS to avoid 403 errors. 
+
+docker compose up -d is the first command that pulls the image and starts the app and database containers in detached mode. docker compose exec web python manage.py migrate applies database migrations inside the running Django container (web service) to ensure the database schema is up to date.
+
+
+
 
